@@ -25,7 +25,7 @@ body {
     border-right: 1px solid rgba(255, 255, 255, 0.5); /* White vertical separator line */
     display: flex; /* Enable flexbox */
     flex-direction: column; /* Stack items vertically */
-    justify-content: center; /* Vertically center the content (the ul) */
+    /* justify-content: center; */ /* Removed to prevent shifting on sub-menu expand */
 }
 .sidebar h3 {
     color: #e0e0e0;
@@ -37,8 +37,9 @@ body {
 }
 .sidebar ul {
     list-style-type: none;
-    padding: 0;
     margin: 0;
+    padding: 0; /* Resets default ul padding */
+    padding-top: 15vh; /* Adjust this value to control the "centered" appearance */
 }
 .sidebar ul li {
     margin-bottom: 10px;
@@ -57,17 +58,34 @@ body {
     color: #ffffff;
 }
 
-.sidebar ul .sub-nav {
+.sidebar ul li > .sub-nav { /* Target .sub-nav that is a direct child of li */
+    display: none; /* Hide by default */
     list-style-type: none;
     padding-left: 15px; /* Indent the sub-navigation */
-    margin-top: 5px;
-    margin-bottom: 15px; /* Add space below the sub-nav */
+    padding-top: 0px;
+    /* margin-bottom: 15px; */ /* Optional: adjust spacing */
 }
 
-.sidebar ul .sub-nav li a {
-    font-size: 0.9em; /* Slightly smaller font for sub-items */
-    padding: 8px 10px; /* Adjust padding */
+/* Show sub-nav when the parent li's direct anchor child is active */
+.sidebar ul li > a.active + .sub-nav {
+    display: block;
 }
+
+.sidebar ul li > .sub-nav li a {
+    font-size: 0.9em; /* Slightly smaller font for sub-items */
+    padding: 8px 10px;
+}
+
+.sidebar ul li.nav-separator {
+    margin: 10px 0; /* Adjust vertical spacing */
+}
+.sidebar ul li.nav-separator hr {
+    border: 0;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.25); /* Separator color */
+    margin: 0 10px; /* Spacing and slight indent for the line */
+}
+
 .main-content-area {
     flex-grow: 1;
     /* Top padding is removed as top-spacer will create the space */
@@ -231,4 +249,12 @@ body {
     overflow-x: auto;
     color: #c5c8c6; /* Light grey for code */
     font-family: 'Courier New', Courier, monospace;
+}
+
+.content-separator {
+    border: 0;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2); /* Adjust color and opacity as needed */
+    margin: 30px 0; /* Add some vertical spacing around the line */
+}
 }

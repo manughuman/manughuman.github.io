@@ -7,15 +7,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateActiveStates(activeIndex) {
         // Update navigation links
-        navLinks.forEach((link, i) => {
-            if (i === activeIndex) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
-            }
+        // 1. Deactivate all nav links
+        navLinks.forEach(link => {
+            link.classList.remove('active');
         });
 
-        // Update content sections
+        // 2. Activate the current link (if valid index)
+        if (activeIndex !== -1 && navLinks[activeIndex]) {
+            navLinks[activeIndex].classList.add('active');
+
+            // 3. If a sub-link (Git or Linux Utilities) is active, also activate its parent "Utilities" link
+            const activeLinkHref = navLinks[activeIndex].getAttribute('href');
+            if (activeLinkHref === '#git-utilities' || activeLinkHref === '#linux-utilities') {
+                const utilitiesLink = document.querySelector('.sidebar ul > li > a[href="#utilities-main"]'); // Adjust href if you changed it
+                if (utilitiesLink) {
+                    utilitiesLink.classList.add('active');
+                }
+            }
+        }
+
+        // 4. Update content section highlights
         sections.forEach((section, i) => {
             if (i === activeIndex) {
                 section.classList.add('section-highlight');
@@ -43,14 +54,33 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     navLinks.forEach((link, index) => {
-        link.addEventListener('click', function () {
-            updateActiveStates(index);
-            recentlyClicked = true;
-            clearTimeout(clickTimeout);
-            // Ignore scroll-based updates for a short period to let the click state dominate
-            clickTimeout = setTimeout(() => {
-                recentlyClicked = false;
-            }, 500); // Adjust timeout as needed (e.g., 300-700ms)
+        link.addEventListener('click', function (e) {
+            const href = link.getAttribute('href');
+
+            if (href === '#utilities-main') {
+                e.preventDefault(); // Prevent default scroll for the main Utilities toggle
+                const utilitiesLink = this;
+                const subNav = utilitiesLink.nextElementSibling; // The ul.sub-nav
+
+                // Toggle the active state of the Utilities link itself
+                utilitiesLink.classList.toggle('active');
+
+                // If Utilities link is now inactive (closed), ensure its children links are also inactive
+                // Note: section highlights for children will clear on next scroll/click via updateActiveStates
+                if (!utilitiesLink.classList.contains('active') && subNav) {
+                    subNav.querySelectorAll('a').forEach(subLink => {
+                        subLink.classList.remove('active');
+                    });
+                }
+            } else {
+                // Behavior for all other links (including sub-links of Utilities)
+                updateActiveStates(index);
+                recentlyClicked = true;
+                clearTimeout(clickTimeout);
+                clickTimeout = setTimeout(() => {
+                    recentlyClicked = false;
+                }, 500);
+            }
         });
     });
 
@@ -58,12 +88,11 @@ document.addEventListener('DOMContentLoaded', function () {
     handleActiveStateOnScroll();
     // Update active states on scroll
     window.addEventListener('scroll', handleActiveStateOnScroll);
-
     // Scroll to top button functionality
     const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
     // When the user scrolls down 200px from the top of the document, show the button
-    window.onscroll = function() {scrollFunction()};
+    window.addEventListener('scroll', scrollFunction); // Changed from onscroll
 
     function scrollFunction() {
         if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
@@ -82,16 +111,16 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Fetch and display Git Utilities
-    async function fetchGitUtilities() {
-        const url = 'https://raw.githubusercontent.com/manughuman/tips/main/git-utilities.md';
-        const contentDiv = document.getElementById('git-utilities-content');
+    // Generic function to fetch markdown and display as collapsible items
+    async function fetchAndDisplayMarkdownAsCollapsible(markdownUrl, targetDivId, sectionName) {
+        const contentDiv = document.getElementById(targetDivId);
         if (!contentDiv) return;
 
         try {
-            const response = await fetch(url);
+            const response = await fetch(markdownUrl);
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                contentDiv.innerHTML = `<p>Error loading ${sectionName}: Could not fetch content (status: ${response.status})</p>`;
+                throw new Error(`HTTP error! status: ${response.status} for ${markdownUrl}`);
             }
             const markdown = await response.text();
             const lines = markdown.split('\n');
@@ -99,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let currentCollapsible = null;
             let currentContent = '';
             let inCodeBlock = false;
-
+    
             lines.forEach(line => {
                 if (line.startsWith('## ')) { // H2 for collapsible title
                     if (currentCollapsible) {
@@ -110,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     inCodeBlock = false;
                 } else if (line.startsWith('```')) {
                     inCodeBlock = !inCodeBlock;
-                    currentContent += line + '\n'; // Keep the backticks for pre/code
+                    currentContent += line + '\n';
                 } else if (currentCollapsible) {
                     currentContent += line + '\n';
                 }
@@ -122,8 +151,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
         } catch (error) {
-            contentDiv.innerHTML = `<p>Error loading Git Utilities: ${error.message}</p>`;
-            console.error('Failed to fetch Git Utilities:', error);
+            // Error message is set inside the try block if response.ok is false
+            console.error(`Failed to fetch or process ${sectionName}:`, error);
         }
     }
 
@@ -150,7 +179,19 @@ document.addEventListener('DOMContentLoaded', function () {
         parentDiv.appendChild(contentDiv);
     }
 
-    fetchGitUtilities();
+    // Call the modularized function for Git Utilities
+    fetchAndDisplayMarkdownAsCollapsible(
+        'https://raw.githubusercontent.com/manughuman/tips/main/git-utilities.md',
+        'git-utilities-content',
+        'Git Utilities'
+    );
+
+    // Call the modularized function for Linux Utilities
+    fetchAndDisplayMarkdownAsCollapsible(
+        'https://raw.githubusercontent.com/manughuman/tips/main/linux-utilities.md',
+        'linux-utilities-content',
+        'Linux Utilities'
+    );
 
     // Main section collapsible functionality
     document.querySelectorAll('.section-collapsible-title').forEach(button => {
