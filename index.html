@@ -3,45 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z2FsYXh5fGVufDB8fDB8fHww&auto=format&fit=crop&w=1000&q=80'); /* Replace with your preferred space/galaxy image URL */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: #f0f0f0; /* Light text color for dark background */
-        }
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background for content */
-            padding: 20px;
-            border-radius: 8px;
-        }
-        h1, h2 { color: #e0e0e0; border-bottom: 1px solid #555; padding-bottom: 10px;}
-        .project { margin-bottom: 15px; }
-        a { color: #76d7c4; text-decoration: none; } /* Brighter link color */
-        a:hover { text-decoration: underline; }
-    </style>
+    <title>Manu Ghuman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Manu Ghuman</h1>
-        <p>Welcome to my personal website! I'm a [Your Profession/Passion] based in [Your Location].</p>
+    <div class="page-wrapper">
+        <nav class="sidebar">
+            <!-- <h3>Navigation</h3> REMOVED -->
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#interests">Interests</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#connect">Connect</a></li>
+            </ul>
+        </nav>
+        <main class="main-content-area">
+            <div class="top-spacer"></div>
+            <div class="container">
+                <section id="about">
+                    <h1>Manu Ghuman</h1>
+                    <p>Welcome to my personal website! I'm a software professional based in Arizona. Please visit again to learn more about me and my work.</p>
+                </section>
 
-        <h2>My Projects</h2>
-        <div class="project">
-            <a href="https://github.com/manughuman/tips" target="_blank">Developer Tips & Utilities</a>
-            <p>This repository is a collection of helpful tips, tricks, and utility scripts to aid in software development.</p>
+                <section id="resume">
+                    <h2>Resume</h2>
+                    <p>In this section, I will provide a summary of my resume, key skills, and experiences. I will also include a link to download my full resume.</p>
+                    <p><a href="[Link_To_Your_Resume.pdf]" target="_blank">Download My Resume (PDF)</a></p>
+                </section>
+
+                <section id="interests">
+                    <h2>Interests</h2>
+                    <p>Here are some of my personal or professional interests.</p>
+                </section>
+
+                <section id="projects">
+                    <h2>My Projects</h2>
+                    <div class="project">
+                        <a href="https://github.com/manughuman/tips" target="_blank">Developer Tips & Utilities</a>
+                        <p>This repository is a collection of helpful tips, tricks, and utility scripts to aid in software development.</p>
+                    </div>
+                    <!-- Add more project divs as needed -->
+                    <div class="project">
+                        <a href="[Link to Project 2]" target="_blank">Another Awesome Project</a>
+                        <p>A brief description of another one of my projects.</p>
+                    </div>
+                </section>
+
+                <section id="blog">
+                    <h2>Blog</h2>
+                    <p>This section is where I would like to showcase my blog posts. For now, this is a placeholder.</p>
+                    <!-- Example: <p><a href="[Link_To_Blog_Post]" target="_blank">My Latest Blog Post</a></p> -->
+                </section>
+
+                <section id="connect">
+                    <h2>Connect with Me</h2>
+                    <p>You can find me on <a href="[Link to your LinkedIn]" target="_blank">LinkedIn</a>, <a href="https://github.com/manughuman" target="_blank">GitHub</a>, or <a href="mailto:[Your Email]">email me</a>.</p>
+                </section>
+            </div>
+        </main>
         </div>
-        <!-- Add more projects as needed -->
-
-        <h2>Connect with Me</h2>
-        <p>You can find me on <a href="[Link to your LinkedIn/GitHub/etc.]" target="_blank">LinkedIn</a> or <a href="mailto:[Your Email]">email me</a>.</p>
-    </div>
+    <script src="script.js"></script>
+    <a href="#" id="scrollToTopBtn" title="Go to top">&uarr;</a>
 </body>
 </html>

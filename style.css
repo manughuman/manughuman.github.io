@@ -1,0 +1,162 @@
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-image: url('https://images.unsplash.com/photo-1502134249126-9f3755a50d78?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGdhbGF4eSUyMHBsYW5ldHN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=1000&q=80'); /* New galactic view with planets */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #f0f0f0; /* Light text color for dark background */
+}
+.page-wrapper {
+    display: flex;
+}
+.sidebar {
+    width: 180px; /* Reduced width of the sidebar */
+    /* background-color: rgba(10, 25, 40, 0.85); */ /* Dark, semi-transparent background for sidebar - REMOVED */
+    padding: 25px 15px;
+    height: 100vh; /* Full viewport height */
+    position: sticky; /* Make it sticky on scroll */
+    top: 0;
+    overflow-y: auto; /* Allow scrolling if nav items exceed height */
+    box-sizing: border-box;
+    border-right: 1px solid rgba(255, 255, 255, 0.5); /* White vertical separator line */
+    display: flex; /* Enable flexbox */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Vertically center the content (the ul) */
+}
+.sidebar h3 {
+    color: #e0e0e0;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 10px;
+}
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+.sidebar ul li a {
+    color: #a0d8ef; /* Light blue link color */
+    text-decoration: none;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+.sidebar ul li a:hover,
+.sidebar ul li a.active { /* Style for active link */
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.main-content-area {
+    flex-grow: 1;
+    /* Top padding is removed as top-spacer will create the space */
+    padding: 100px 40px 40px 20px; /* Added top padding to match .top-spacer height */
+    overflow-y: auto; /* Allows this area to scroll */
+    position: relative; /* Establishes a stacking context if needed, though not strictly for fixed children */
+}
+.container {
+    /* The top-spacer will handle the initial top spacing now */
+    /* padding: 30px; */ /* Increased padding for container */
+    padding: 0px 30px 30px 30px; /* Top padding is 0, other sides 30px */
+    /* This relies on .top-spacer to create space above it */
+
+    max-width: 800px;
+    margin: 0 auto; /* Center container in main-content-area */
+    /* background-color: rgba(0, 0, 0, 0.65); */ /* Subtle dark background for content readability - REMOVED */
+    border-radius: 8px;
+}
+
+.top-spacer {
+    height: 100px; /* This div creates the actual scrollable space at the top */
+    position: fixed;
+    top: 0;
+    left: 180px; /* This should match your sidebar's width */
+    right: 0; /* Makes it span the remaining width */
+    /* It's invisible by default as it has no content/background/border */
+}
+
+.container section {
+    margin-bottom: 40px; /* Space between sections */
+    /* Effects below are removed to simplify and focus on title highlight */
+    /* opacity: 0.7; */
+    /* transform: translateY(20px); */
+    transition: padding 0.3s ease-in-out; /* Keep padding transition if desired, or remove */
+}
+
+.container section.section-highlight {
+    /* background-color: rgba(255, 255, 255, 0.07); */ /* Subtle white overlay for active section - REMOVED */
+    /* opacity: 1; */
+    /* transform: translateY(0); */
+    /* padding: 20px; */ /* Remove if not desired for section highlight */
+    /* margin-left: -20px; */ /* Remove if padding is removed */
+    /* margin-right: -20px; */ /* Remove if padding is removed */
+}
+
+.container section:last-child {
+    margin-bottom: 0;
+}
+
+.container h1, .container h2 {
+    color: #e0e0e0;
+    border-bottom: 1px solid rgba(255,255,255,0.2); /* Lighter border */
+    padding-bottom: 10px;
+    margin-top: 0; /* Remove default top margin for headings in sections */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    transition: color 0.3s ease, text-shadow 0.3s ease; /* Add transition for title effects */
+}
+
+.container section.section-highlight h1,
+.container section.section-highlight h2 {
+    color: #ffffff; /* Brighter color for active section title */
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* Subtle glow effect for active title */
+}
+.container h1 {
+    font-size: 2.8em;
+    font-weight: 700;
+}
+.container h2 {
+    font-size: 1.8em;
+    font-weight: 600;
+}
+.container .project {
+    margin-bottom: 25px;
+    /* background-color: rgba(255, 255, 255, 0.05); */
+    padding: 20px;
+    border-radius: 8px;
+    /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.container a { color: #76d7c4; text-decoration: none; } /* Brighter link color for content */
+.container a:hover { text-decoration: underline; }
+
+#scrollToTopBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 30px; /* Place from bottom */
+    right: 30px; /* Place from right */
+    z-index: 99; /* Make sure it's on top */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: rgba(128, 128, 128, 0.5); /* Semi-transparent grey background */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 10px 15px; /* Some padding */
+    border-radius: 50%; /* Circular shape */
+    font-size: 18px; /* Increase font size */
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+#scrollToTopBtn:hover {
+    background-color: rgba(85, 85, 85, 0.8); /* Darker background on hover */
+}
