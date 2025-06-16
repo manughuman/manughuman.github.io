@@ -25,7 +25,6 @@ body {
     border-right: 1px solid rgba(255, 255, 255, 0.5); /* White vertical separator line */
     display: flex; /* Enable flexbox */
     flex-direction: column; /* Stack items vertically */
-    /* justify-content: center; */ /* Removed to prevent shifting on sub-menu expand */
 }
 .sidebar h3 {
     color: #e0e0e0;
@@ -63,7 +62,6 @@ body {
     list-style-type: none;
     padding-left: 15px; /* Indent the sub-navigation */
     padding-top: 0px;
-    /* margin-bottom: 15px; */ /* Optional: adjust spacing */
 }
 
 /* Show sub-nav when the parent li's direct anchor child is active */
@@ -95,13 +93,10 @@ body {
 }
 .container {
     /* The top-spacer will handle the initial top spacing now */
-    /* padding: 30px; */ /* Increased padding for container */
     padding: 0px 30px 30px 30px; /* Top padding is 0, other sides 30px */
-    /* This relies on .top-spacer to create space above it */
 
     max-width: 800px;
     margin: 0 auto; /* Center container in main-content-area */
-    /* background-color: rgba(0, 0, 0, 0.65); */ /* Subtle dark background for content readability - REMOVED */
     border-radius: 8px;
 }
 
@@ -111,24 +106,14 @@ body {
     top: 0;
     left: 180px; /* This should match your sidebar's width */
     right: 0; /* Makes it span the remaining width */
-    /* It's invisible by default as it has no content/background/border */
 }
 
 .container section {
     margin-bottom: 40px; /* Space between sections */
-    /* Effects below are removed to simplify and focus on title highlight */
-    /* opacity: 0.7; */
-    /* transform: translateY(20px); */
     transition: padding 0.3s ease-in-out; /* Keep padding transition if desired, or remove */
 }
 
 .container section.section-highlight {
-    /* background-color: rgba(255, 255, 255, 0.07); */ /* Subtle white overlay for active section - REMOVED */
-    /* opacity: 1; */
-    /* transform: translateY(0); */
-    /* padding: 20px; */ /* Remove if not desired for section highlight */
-    /* margin-left: -20px; */ /* Remove if padding is removed */
-    /* margin-right: -20px; */ /* Remove if padding is removed */
 }
 
 .container section:last-child {
@@ -159,10 +144,8 @@ body {
 }
 .container .project {
     margin-bottom: 25px;
-    /* background-color: rgba(255, 255, 255, 0.05); */
     padding: 20px;
     border-radius: 8px;
-    /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .container a { color: #76d7c4; text-decoration: none; } /* Brighter link color for content */
@@ -188,30 +171,6 @@ body {
 
 #scrollToTopBtn:hover {
     background-color: rgba(85, 85, 85, 0.8); /* Darker background on hover */
-}
-/* Styles for main section collapsible (e.g., Git Utilities section itself) */
-.section-collapsible-title {
-    background-color: transparent; /* Or a very subtle background */
-    color: #e0e0e0; /* Matches h2 color */
-    cursor: pointer;
-    padding: 10px 0; /* Adjust padding as needed */
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid rgba(255,255,255,0.2); /* Matches h2 border */
-    text-align: left;
-    outline: none;
-    font-size: 1.8em; /* Matches h2 font-size */
-    font-weight: 600; /* Matches h2 font-weight */
-    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Ensure font consistency */
-    margin-bottom: 20px; /* Space before content */
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
-}
-
-.section-collapsible-content {
-    padding: 0; /* No padding for the main wrapper */
-    max-height: 0; /* Hidden by default */
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
 }
 /* Styles for collapsible Git Utilities section */
 .collapsible-title {

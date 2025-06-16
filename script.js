@@ -1,7 +1,12 @@
+// Constants
+const GIT_UTILITIES_URL = 'https://raw.githubusercontent.com/manughuman/tips/main/git-utilities.md';
+const LINUX_UTILITIES_URL = 'https://raw.githubusercontent.com/manughuman/tips/main/linux-utilities.md';
+const SCROLL_OFFSET_FOR_TOP_BTN = 200;
+const CLICK_DEBOUNCE_TIMEOUT = 500;
+
 document.addEventListener('DOMContentLoaded', function () {
     const sections = Array.from(document.querySelectorAll('.main-content-area section'));
     const navLinks = Array.from(document.querySelectorAll('.sidebar ul li a'));
-    
     let recentlyClicked = false;
     let clickTimeout;
 
@@ -79,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 clearTimeout(clickTimeout);
                 clickTimeout = setTimeout(() => {
                     recentlyClicked = false;
-                }, 500);
+                }, CLICK_DEBOUNCE_TIMEOUT);
             }
         });
     });
@@ -95,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', scrollFunction); // Changed from onscroll
 
     function scrollFunction() {
-        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        if (document.body.scrollTop > SCROLL_OFFSET_FOR_TOP_BTN || document.documentElement.scrollTop > SCROLL_OFFSET_FOR_TOP_BTN) {
             scrollToTopBtn.style.display = "block";
         } else {
             scrollToTopBtn.style.display = "none";
@@ -181,31 +186,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Call the modularized function for Git Utilities
     fetchAndDisplayMarkdownAsCollapsible(
-        'https://raw.githubusercontent.com/manughuman/tips/main/git-utilities.md',
+        GIT_UTILITIES_URL,
         'git-utilities-content',
         'Git Utilities'
     );
 
     // Call the modularized function for Linux Utilities
     fetchAndDisplayMarkdownAsCollapsible(
-        'https://raw.githubusercontent.com/manughuman/tips/main/linux-utilities.md',
+        LINUX_UTILITIES_URL,
         'linux-utilities-content',
         'Linux Utilities'
     );
-
-    // Main section collapsible functionality
-    document.querySelectorAll('.section-collapsible-title').forEach(button => {
-        button.addEventListener('click', function() {
-            this.classList.toggle('active'); // Optional: for styling the active button
-            const contentId = this.dataset.target;
-            if (contentId) {
-                const content = document.getElementById(contentId);
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                }
-            }
-        });
-    });
 });
