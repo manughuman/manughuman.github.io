@@ -57,6 +57,17 @@ body {
     color: #ffffff;
 }
 
+.sidebar ul .sub-nav {
+    list-style-type: none;
+    padding-left: 15px; /* Indent the sub-navigation */
+    margin-top: 5px;
+    margin-bottom: 15px; /* Add space below the sub-nav */
+}
+
+.sidebar ul .sub-nav li a {
+    font-size: 0.9em; /* Slightly smaller font for sub-items */
+    padding: 8px 10px; /* Adjust padding */
+}
 .main-content-area {
     flex-grow: 1;
     /* Top padding is removed as top-spacer will create the space */
@@ -159,4 +170,65 @@ body {
 
 #scrollToTopBtn:hover {
     background-color: rgba(85, 85, 85, 0.8); /* Darker background on hover */
+}
+/* Styles for main section collapsible (e.g., Git Utilities section itself) */
+.section-collapsible-title {
+    background-color: transparent; /* Or a very subtle background */
+    color: #e0e0e0; /* Matches h2 color */
+    cursor: pointer;
+    padding: 10px 0; /* Adjust padding as needed */
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.2); /* Matches h2 border */
+    text-align: left;
+    outline: none;
+    font-size: 1.8em; /* Matches h2 font-size */
+    font-weight: 600; /* Matches h2 font-weight */
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Ensure font consistency */
+    margin-bottom: 20px; /* Space before content */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+}
+
+.section-collapsible-content {
+    padding: 0; /* No padding for the main wrapper */
+    max-height: 0; /* Hidden by default */
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
+/* Styles for collapsible Git Utilities section */
+.collapsible-title {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #e0e0e0;
+    cursor: pointer;
+    padding: 15px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 1.1em;
+    margin-top: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.collapsible-title:hover, .collapsible-title.active {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.collapsible-content {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background-color: rgba(0,0,0,0.1); /* Slight background for content area */
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.collapsible-content pre {
+    background-color: rgba(0,0,0,0.3);
+    padding: 15px;
+    border-radius: 4px;
+    overflow-x: auto;
+    color: #c5c8c6; /* Light grey for code */
+    font-family: 'Courier New', Courier, monospace;
 }

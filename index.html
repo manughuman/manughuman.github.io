@@ -18,7 +18,11 @@
                 <li><a href="#resume">Resume</a></li>
                 <li><a href="#interests">Interests</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#blog">Blog</a></li>
+                <ul class="sub-nav">
+                    <li><a href="#git-utilities">Git Utilities</a></li>
+                    <li><a href="#linux-utilities">Linux Utilities</a></li>
+                </ul>
+                <li><a href="#blog">Blog</a></li> <!-- Keep blog link separate -->
                 <li><a href="#connect">Connect</a></li>
             </ul>
         </nav>
@@ -51,6 +55,20 @@
                     <div class="project">
                         <a href="[Link to Project 2]" target="_blank">Another Awesome Project</a>
                         <p>A brief description of another one of my projects.</p>
+                    </div>
+                </section>
+
+                <section id="git-utilities">
+                    <button class="section-collapsible-title" data-target="git-utilities-main-content">Git Utilities</button>
+                    <div class="section-collapsible-content" id="git-utilities-main-content">
+                        <div id="git-utilities-content"></div> <!-- Inner content will be loaded here -->
+                    </div>
+                </section>
+
+                <section id="linux-utilities">
+                    <button class="section-collapsible-title sub-project-title" data-target="linux-utilities-main-content">Linux Utilities</button>
+                    <div class="section-collapsible-content" id="linux-utilities-main-content">
+                        <div id="linux-utilities-content"></div> <!-- Inner content will be loaded here -->
                     </div>
                 </section>
 
